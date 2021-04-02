@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       // FragmentTransaction fragmentTramsaction = getSupportFragmentManager().beginTransaction();
+
+        //fragmentTramsaction.add(R.id.flFragment,new )
+
         frag1 = new FirstFragment();
         frag2 = new SecondFragment();
         frag3 = new ThirdFragment();
