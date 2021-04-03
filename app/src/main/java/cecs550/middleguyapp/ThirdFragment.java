@@ -39,7 +39,8 @@ public class ThirdFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFrag();
+                openActivity2();
+                //goToFrag();
             }
         });
 
@@ -59,6 +60,11 @@ public class ThirdFragment extends Fragment {
         fragmentTransaction.replace(R.id.flFragment, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void openActivity2() {
+        Intent intent = new Intent(getActivity(), MyRequests.class);
+        startActivity(intent);
     }
 
 
