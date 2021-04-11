@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,8 +24,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Context context = getApplicationContext();
+        //CharSequence text = "Signed up Successfully!";
+        int duration = Toast.LENGTH_SHORT;
+
+
+        Bundle extras = getIntent().getExtras();
+        String username = extras.getString("username") + " logged in!";
+        String token = extras.getString("token");
+        final Toast toast = Toast.makeText(context, username, duration);
+        toast.show();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("username",username);
+        bundle.putString("token",token);
+
 
        // FragmentTransaction fragmentTramsaction = getSupportFragmentManager().beginTransaction();
 
@@ -38,20 +57,6 @@ public class MainActivity extends AppCompatActivity {
                findViewById(R.id.bottomNavigationView); navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-  /*  public void openLogin_Activity() {
-        Intent intent = new Intent(this, MyRequests.class);
-        startActivity(intent);
-        finish();
-    }*/
-
-//    private void replaceFragment(){
-//       Fragment fragment = new Fragment();
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//       FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.flFragment, fragment);
-//        fragmentTransaction.commit();
-//    }
 
     private void setFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -64,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Bundle extras = getIntent().getExtras();
+            String username = extras.getString("username");
+            String token = extras.getString("token");
+            Bundle bundle = new Bundle();
+            bundle.putString("username",username);
+            bundle.putString("token",token);
             switch (item.getItemId()) {
                 case R.id.nav_home:
                     setFragment(frag1);
@@ -75,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_person:
+                    frag3.setArguments(bundle);
                     setFragment(frag3);
                     break;
             }

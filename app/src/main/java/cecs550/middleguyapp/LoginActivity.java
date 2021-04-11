@@ -2,13 +2,14 @@ package cecs550.middleguyapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -16,39 +17,46 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LoginActivity extends AppCompatActivity {
 
-    public Button buttonTest;
+    public Button loginBtn;
+    public Button signUpBtn;
+    //Intent i = new Intent(this, MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        buttonTest = findViewById(R.id.loginButton);
+        loginBtn = findViewById(R.id.loginButton);
+        signUpBtn = findViewById(R.id.signUpButton);
 
-        buttonTest.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLogin_Activity();
+                //openLogin_Activity();
                 //volleyGet()
-                //volleyPost();
+                volleyPostLogin();
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volleyPostSign();
             }
         });
 
     }
 
-    public void openLogin_Activity() {
+    public void openLogin_Activity(String token, String username) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("token",token);
+        intent.putExtra("username",username);
         startActivity(intent);
         finish();
     }
@@ -108,16 +116,20 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void volleyPost(){
+    public void volleyPostSign(){
 
-        final TextView textView = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textViewUser = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
+
+        final String userName = textViewUser.getText().toString();
+        String password = textViewPass.getText().toString();
         String postUrl = " http://159.65.191.124:3000/create/user";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JSONObject postData = new JSONObject();
         try {
-            postData.put("name", "Jonathan");
-            postData.put("password", "test123");
+            postData.put("name", userName);
+            postData.put("password", password);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -127,9 +139,80 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 String desc;
+                Context context = getApplicationContext();
+                //CharSequence text = "Signed up Successfully!";
+                int duration = Toast.LENGTH_SHORT;
+
                 try {
                     desc = response.getString("message");
-                    textView.setText((desc));
+                    final Toast toast = Toast.makeText(context, desc, duration);
+                    //textViewUser.setText((desc));
+                    toast.show();
+                    if (desc.equals("User Created!"))
+                    {
+                        textViewUser.setText("");
+                        textViewPass.setText("");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+    public void volleyPostLogin(){
+
+        final TextView textViewUser = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
+
+        final String userName = textViewUser.getText().toString();
+        String password = textViewPass.getText().toString();
+        String postUrl = "http://159.65.191.124:3000/create/session";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("name", userName);
+            postData.put("password", password);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String desc;
+                String token;
+                Context context = getApplicationContext();
+
+                //CharSequence text = "Signed up Successfully!";
+                int duration = Toast.LENGTH_SHORT;
+
+                try {
+                    token = response.getString("token");
+                    desc = response.getString("message");
+                    final Toast toast = Toast.makeText(context, desc, duration);
+                    //textViewUser.setText((desc));
+                    toast.setGravity(Gravity.BOTTOM|Gravity.LEFT,0,0);
+                    toast.show();
+                    if (desc.equals("Session Created!"))
+                    {
+                        textViewUser.setText("");
+                        textViewPass.setText("");
+
+                       // i.putExtra("UserToken", token);
+                        openLogin_Activity(token,userName);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
