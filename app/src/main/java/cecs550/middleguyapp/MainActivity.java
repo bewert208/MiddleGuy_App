@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -37,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
                findViewById(R.id.bottomNavigationView); navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+  /*  public void openLogin_Activity() {
+        Intent intent = new Intent(this, MyRequests.class);
+        startActivity(intent);
+        finish();
+    }*/
+
 //    private void replaceFragment(){
 //       Fragment fragment = new Fragment();
 //
@@ -60,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.nav_home:
                     setFragment(frag1);
+                    //openLogin_Activity();
                     break;
 
                 case  R.id.nav_chat:
@@ -76,3 +84,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
