@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -25,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public Button loginBtn;
     public Button signUpBtn;
-    //Intent i = new Intent(this, MainActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +53,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void openLogin_Activity(String token, String username) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("token",token);
-        intent.putExtra("username",username);
-        startActivity(intent);
+    public void openLogin_Activity(String token, String username, String password, int activity) {
+        //Intent intent = new Intent(this, MainActivity.class);
+        //intent.putExtra("token",token);
+        //intent.putExtra("username",username);
+        //intent.putExtra("password",password);
+       // intent.putExtra("activity", activity);
+        //startActivity(intent);
         finish();
     }
 
@@ -175,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
 
         final String userName = textViewUser.getText().toString();
-        String password = textViewPass.getText().toString();
+        final String password = textViewPass.getText().toString();
         String postUrl = "http://159.65.191.124:3000/create/session";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -199,19 +201,32 @@ public class LoginActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
 
                 try {
-                    token = response.getString("token");
                     desc = response.getString("message");
-                    final Toast toast = Toast.makeText(context, desc, duration);
-                    //textViewUser.setText((desc));
-                    toast.setGravity(Gravity.BOTTOM|Gravity.LEFT,0,0);
-                    toast.show();
+                    token = response.getString("token");
+
+                    String toastMessage = desc  +" " + userName +" logged in!";
+                    final Toast toast1 = Toast.makeText(context, desc, duration);
+                    textViewUser.setText((desc));
+                    //toast.setGravity(Gravity.BOTTOM|Gravity.LEFT,0,0);
+                    toast1.show();
                     if (desc.equals("Session Created!"))
                     {
                         textViewUser.setText("");
                         textViewPass.setText("");
-
+                        final Toast toast = Toast.makeText(context, toastMessage, duration);
+                        toast.show();
                        // i.putExtra("UserToken", token);
-                        openLogin_Activity(token,userName);
+                        int activity = 1;
+
+                        openLogin_Activity(token,userName,password, activity);
+                        SharedPreferences sharedPreferences = getSharedPreferences("MiddleGuyPref", MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("username",userName);
+                        myEdit.putString("password",password);
+                        myEdit.putString("token",token);
+                        myEdit.commit();
+                    }else{
+                        toast1.show();
                     }
 
                 } catch (JSONException e) {

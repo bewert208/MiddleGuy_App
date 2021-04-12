@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,14 +35,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         Bundle extras = getIntent().getExtras();
-        String username = extras.getString("username") + " logged in!";
-        String token = extras.getString("token");
-        final Toast toast = Toast.makeText(context, username, duration);
-        toast.show();
+        int activity = extras.getInt("activity");
+       //String token = extras.getString("token");
+        //String password = extras.getString("password");
+        //final Toast toast = Toast.makeText(context, username, duration);
+        //toast.show();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("username",username);
-        bundle.putString("token",token);
+        //Bundle bundle = new Bundle();
+        //bundle.putString("username",username);
+       // bundle.putString("token",token);
+        //bundle.putString("password",password);
 
 
        // FragmentTransaction fragmentTramsaction = getSupportFragmentManager().beginTransaction();
@@ -52,9 +55,20 @@ public class MainActivity extends AppCompatActivity {
         frag2 = new SecondFragment();
         frag3 = new ThirdFragment();
 
+
+
         setFragment(frag1);
-       BottomNavigationView navigation = (BottomNavigationView)
-               findViewById(R.id.bottomNavigationView); navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationView navigation = (BottomNavigationView)
+                findViewById(R.id.bottomNavigationView); navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+                if (activity == 0)
+                {
+                    BottomNavigationView bottomNavigationView;
+                    bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+                    bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+                    bottomNavigationView.setSelectedItemId(R.id.nav_person);
+                }
+
     }
 
 
@@ -69,12 +83,14 @@ public class MainActivity extends AppCompatActivity {
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Bundle extras = getIntent().getExtras();
-            String username = extras.getString("username");
-            String token = extras.getString("token");
-            Bundle bundle = new Bundle();
-            bundle.putString("username",username);
-            bundle.putString("token",token);
+            //Bundle extras = getIntent().getExtras();
+            //String username = extras.getString("username");
+            //String token = extras.getString("token");
+            //String password = extras.getString("password");
+            //Bundle bundle = new Bundle();
+            //bundle.putString("username",username);
+            //bundle.putString("token",token);
+            //bundle.putString("password",password);
             switch (item.getItemId()) {
                 case R.id.nav_home:
                     setFragment(frag1);
@@ -86,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_person:
-                    frag3.setArguments(bundle);
+                    //frag3.setArguments(bundle);
                     setFragment(frag3);
                     break;
             }
