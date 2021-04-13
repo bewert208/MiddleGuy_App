@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     public Fragment frag1;
     public Fragment frag2;
     public Fragment frag3;

@@ -58,6 +58,7 @@ public class ThirdFragment extends Fragment {
         final String userName = sh.getString("username","empty");
         final String token = sh.getString("token","empty");
         final String password = sh.getString("password","empty");
+        final String picture = sh.getString("picture","empty");
 
 
         /*final Intent i = new Intent(getActivity().getBaseContext(), EditProfile.class);
@@ -68,6 +69,8 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_3, container,
                 false);
         Button btn = (Button) view.findViewById(R.id.btnMyRequests);
+        ImageView profileImg = view.findViewById(R.id.imageView2);
+        profileImg.setImageBitmap(BitmapFactory.decodeFile(picture));
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,6 +211,136 @@ public class ThirdFragment extends Fragment {
 
         requestQueue.add(jsonObjectRequest);
 
+
+
+
+        final TextView TextViewBio = (TextView) view.findViewById(R.id.textViewBio);
+        String postUrlBio = "http://159.65.191.124:3000/authenticated/user/bio_get";
+        RequestQueue requestQueueBio = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        JSONObject postDataBio = new JSONObject();
+
+        JsonObjectRequest jsonObjectRequestBio = new JsonObjectRequest(Request.Method.POST, postUrlBio, postDataBio, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String desc;
+                Context context = (getActivity().getApplicationContext());
+
+                int duration = Toast.LENGTH_SHORT;
+
+                try {
+                    desc = response.getString("bio");
+                    TextViewBio.setText((desc));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    CharSequence text = "Obtaining bio error";
+                    final Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+
+        requestQueueBio.add(jsonObjectRequestBio);
+
+
+
+        final TextView TextViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
+        String postUrlEmail = "http://159.65.191.124:3000/authenticated/user/email_get";
+        RequestQueue requestQueueEmail = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        JSONObject postDataEmail = new JSONObject();
+
+        JsonObjectRequest jsonObjectRequestEmail = new JsonObjectRequest(Request.Method.POST, postUrlEmail, postDataEmail, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String desc;
+                Context context = (getActivity().getApplicationContext());
+
+                int duration = Toast.LENGTH_SHORT;
+
+                try {
+                    desc = response.getString("email");
+                    TextViewEmail.setText((desc));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    CharSequence text = "Obtaining email error";
+                    final Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+
+        requestQueueEmail.add(jsonObjectRequestEmail);
+
+
+        final TextView TextViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
+        String postUrlPhone = "http://159.65.191.124:3000/authenticated/user/phone_get";
+        RequestQueue requestQueuePhone = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        JSONObject postDataPhone = new JSONObject();
+
+        JsonObjectRequest jsonObjectRequestPhone = new JsonObjectRequest(Request.Method.POST, postUrlPhone, postDataPhone, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String desc;
+                Context context = (getActivity().getApplicationContext());
+
+                int duration = Toast.LENGTH_SHORT;
+
+                try {
+                    desc = response.getString("phone");
+
+                    TextViewPhone.setText((desc));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    CharSequence text = "Obtaining phone error";
+                    final Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+
+        requestQueuePhone.add(jsonObjectRequestPhone);
+
         return view;
         // Inflate the layout for this fragment
        // return inflater.inflate(R.layout.fragment_3,
@@ -241,71 +374,13 @@ public class ThirdFragment extends Fragment {
 
     public void openEditProfile(String username, String password, String token) {
         Intent intent = new Intent(getActivity(), EditProfile.class);
-        intent.putExtra("username",username);
-        intent.putExtra("password",password);
-        intent.putExtra("token",token);
+        //intent.putExtra("username",username);
+        //intent.putExtra("password",password);
+        //intent.putExtra("token",token);
         startActivity(intent);
     }
 
-   /* public void volleyPostLogout(){
 
-        //final TextView textViewUser = (TextView) findViewById(R.id.editTextUserName);
-        //final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
-
-
-        //String userName = textViewUser.getText().toString();
-        //String password = textViewPass.getText().toString();
-        String postUrl = "http://159.65.191.124:3000/authenticated/logout";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("name", userName);
-            postData.put("password", password);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                String desc;
-                String token;
-                Context context = getApplicationContext();
-
-                //CharSequence text = "Signed up Successfully!";
-                int duration = Toast.LENGTH_SHORT;
-
-                try {
-                    desc = response.getString("message");
-                    token = response.getString("token");
-                    final Toast toast = Toast.makeText(context, desc, duration);
-                    //textViewUser.setText((desc));
-                    toast.show();
-                    if (desc.equals("Session Created!"))
-                    {
-                        textViewUser.setText("");
-                        textViewPass.setText("");
-
-                        // i.putExtra("UserToken", token);
-                        openLogin_Activity(token);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        requestQueue.add(jsonObjectRequest);
-
-    }*/
 
 
 }

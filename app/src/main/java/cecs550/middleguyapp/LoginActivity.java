@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public Button loginBtn;
     public Button signUpBtn;
-
+    //int defaultImage = R.drawable.person;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +53,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void openLogin_Activity(String token, String username, String password, int activity) {
-        //Intent intent = new Intent(this, MainActivity.class);
+    public void openLogin_Activity( int activity) {
+        Intent intent = new Intent(this, MainActivity.class);
         //intent.putExtra("token",token);
         //intent.putExtra("username",username);
         //intent.putExtra("password",password);
-       // intent.putExtra("activity", activity);
-        //startActivity(intent);
+       intent.putExtra("activity", activity);
+        startActivity(intent);
         finish();
     }
 
@@ -218,12 +218,13 @@ public class LoginActivity extends AppCompatActivity {
                        // i.putExtra("UserToken", token);
                         int activity = 1;
 
-                        openLogin_Activity(token,userName,password, activity);
+                        openLogin_Activity(activity);
                         SharedPreferences sharedPreferences = getSharedPreferences("MiddleGuyPref", MODE_PRIVATE);
                         SharedPreferences.Editor myEdit = sharedPreferences.edit();
                         myEdit.putString("username",userName);
                         myEdit.putString("password",password);
                         myEdit.putString("token",token);
+                       // myEdit.putString("picture",defaultImage);
                         myEdit.commit();
                     }else{
                         toast1.show();

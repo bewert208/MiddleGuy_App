@@ -18,10 +18,10 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewBio"
         android:layout_width="211dp"
         android:layout_height="101dp"
-        android:text="Bio"
+        android:text="Please add a bio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
@@ -31,8 +31,8 @@
 
     <Button
         android:id="@+id/btnMyRequests"
-        android:layout_width="267dp"
-        android:layout_height="42dp"
+        android:layout_width="264dp"
+        android:layout_height="48dp"
         android:text="My Requests"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,23 +50,23 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.525" />
 
     <Button
         android:id="@+id/bioBtn"
-        android:layout_width="261dp"
-        android:layout_height="49dp"
+        android:layout_width="264dp"
+        android:layout_height="48dp"
         android:text="Received Offers"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615" />
+        app:layout_constraintVertical_bias="0.613" />
 
     <Button
         android:id="@+id/logoutBtn"
@@ -88,12 +88,12 @@
         android:layout_height="wrap_content"
         android:text="Edit Profile"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnMyRequests"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBio"
+        app:layout_constraintVertical_bias="0.033" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -101,11 +101,35 @@
         android:layout_height="156dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMyRequests"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/textViewBio"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.102"
-        app:srcCompat="@drawable/face" />
+        app:srcCompat="@drawable/person" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="148dp"
+        android:layout_height="23dp"
+        android:text="Please add a email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBio"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="148dp"
+        android:layout_height="23dp"
+        android:text="Please add a phone "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
+        app:layout_constraintVertical_bias="0.021" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
