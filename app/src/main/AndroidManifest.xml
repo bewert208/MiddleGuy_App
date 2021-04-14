@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".OfferActivity"></activity>
+        <activity android:name=".EditProfile" />
         <activity android:name=".MyRequests" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">

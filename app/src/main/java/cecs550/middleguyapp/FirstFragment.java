@@ -1,19 +1,38 @@
 package cecs550.middleguyapp;
 
+import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class FirstFragment extends ListFragment {
+public class FirstFragment extends Fragment {
 
     public FirstFragment(){
     }
+
+    /*private View.OnClickListener onItemClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)
+                    view.getTag();
+            int position = viewHolder.getAdapterPosition();
+            String shoeID = DummyData.description[position];
+            Intent intent = new Intent(getActivity(), OfferActivity.class);
+            intent.putExtra("shoeID",shoeID);
+            startActivity(intent);
+        }
+    };*/
 
 
 
@@ -29,13 +48,22 @@ public class FirstFragment extends ListFragment {
         /*ListView lv = (ListView)rootView.findViewById(R.id.list);
         lv.setAdapter(adaoter);*/
 
-        String[] values = new String[] { "Message1", "Message2", "Message3" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+
+        RecyclerView recyclerView = rootView.findViewById(R.id.recylcerViewPost);
+        RecyclerAdapter listAdapter = new RecyclerAdapter();
+        recyclerView.setAdapter(listAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, values);
-        setListAdapter(adapter);
+        setListAdapter(adapter);*/
         return rootView;
 
     }
+
 
 
 }

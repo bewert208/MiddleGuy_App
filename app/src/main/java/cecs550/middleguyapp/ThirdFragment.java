@@ -143,7 +143,7 @@ public class ThirdFragment extends Fragment {
         editName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openEditProfile(userName, password, token);
+                openEditProfile();
 
 
             }
@@ -155,6 +155,9 @@ public class ThirdFragment extends Fragment {
         final String token = extras.getString("token");*/
 
         final TextView TextViewUserName = (TextView) view.findViewById(R.id.textViewUserName);
+        final TextView TextViewBio = (TextView) view.findViewById(R.id.textViewBio);
+        final TextView TextViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
+        final TextView TextViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
         //final String newName = TextViewUserName.getText().toString();
 
         String postUrl = "http://159.65.191.124:3000/authenticated/user/name_get";
@@ -209,14 +212,14 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        requestQueue.add(jsonObjectRequest);
 
 
 
 
-        final TextView TextViewBio = (TextView) view.findViewById(R.id.textViewBio);
+
+
         String postUrlBio = "http://159.65.191.124:3000/authenticated/user/bio_get";
-        RequestQueue requestQueueBio = Volley.newRequestQueue(getActivity().getApplicationContext());
+       // RequestQueue requestQueueBio = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postDataBio = new JSONObject();
 
@@ -253,13 +256,13 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        requestQueueBio.add(jsonObjectRequestBio);
+        //requestQueueBio.add(jsonObjectRequestBio);
 
 
 
-        final TextView TextViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
+
         String postUrlEmail = "http://159.65.191.124:3000/authenticated/user/email_get";
-        RequestQueue requestQueueEmail = Volley.newRequestQueue(getActivity().getApplicationContext());
+        //RequestQueue requestQueueEmail = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postDataEmail = new JSONObject();
 
@@ -296,12 +299,11 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        requestQueueEmail.add(jsonObjectRequestEmail);
+        //requestQueueEmail.add(jsonObjectRequestEmail);
 
 
-        final TextView TextViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
+
         String postUrlPhone = "http://159.65.191.124:3000/authenticated/user/phone_get";
-        RequestQueue requestQueuePhone = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postDataPhone = new JSONObject();
 
@@ -339,27 +341,17 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        requestQueuePhone.add(jsonObjectRequestPhone);
+        //requestQueuePhone.add(jsonObjectRequestPhone);
+        //requestQueuePhone.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequestBio);
+        requestQueue.add(jsonObjectRequestEmail);
+        requestQueue.add(jsonObjectRequestPhone);
 
         return view;
-        // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_3,
-               // container, false);
-
 
     }
 
-
-
-    /*public void goToFrag()
-    {
-        Fragment fragment = new FourthFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.flFragment, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }*/
 
     public void openActivity2() {
         Intent intent = new Intent(getActivity(), MyRequests.class);
@@ -372,11 +364,8 @@ public class ThirdFragment extends Fragment {
 
     }
 
-    public void openEditProfile(String username, String password, String token) {
+    public void openEditProfile() {
         Intent intent = new Intent(getActivity(), EditProfile.class);
-        //intent.putExtra("username",username);
-        //intent.putExtra("password",password);
-        //intent.putExtra("token",token);
         startActivity(intent);
     }
 
