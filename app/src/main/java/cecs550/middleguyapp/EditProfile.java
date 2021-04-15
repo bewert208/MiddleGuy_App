@@ -19,9 +19,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +52,9 @@ public class EditProfile extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
     public Button loginBtn;
     public Button changeImgBtn;
+    public Button changePswBtn;
+    public Button backButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,28 @@ public class EditProfile extends AppCompatActivity {
 
 
         });
+
+        changePswBtn = findViewById(R.id.changePasswordBtn);
+        changePswBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //onButtonShowPopupWindowClick(view);
+                editPassword();
+
+            }
+        });
+
+        backButton = findViewById(R.id.backBtn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMainAct();
+            }
+        });
+
+
+
         SharedPreferences sh = this.getSharedPreferences("MiddleGuyPref", Context.MODE_PRIVATE);
         final String picture = sh.getString("picture","empty");
         ImageView imageView = findViewById(R.id.editProfileImg);
@@ -97,6 +127,48 @@ public class EditProfile extends AppCompatActivity {
         });
 
     }
+
+    /*public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_window, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        Button updatePsw;
+        updatePsw = findViewById(R.id.updatePswBtn);
+        updatePsw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editPassword();
+            }
+        });
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }*/
+
+
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
@@ -401,6 +473,76 @@ public class EditProfile extends AppCompatActivity {
 
             requestQueue.add(jsonObjectRequest);
         }
+    }
+
+    public void editPassword() {
+        SharedPreferences sh = getSharedPreferences("MiddleGuyPref", Context.MODE_PRIVATE);
+        final String token = sh.getString("token", "empty");
+        //String password = sh.getString("password", "empty");
+
+        TextView name =  findViewById(R.id.editTextUserNamePsw);
+        TextView psw =  findViewById(R.id.editTextOldPwd);
+        TextView newPsw =  findViewById(R.id.editTextNewPwd);
+        String userName = name.getText().toString();
+        String password = psw.getText().toString();
+        String newPassword = newPsw.getText().toString();
+
+
+
+
+            String postUrl = "http://159.65.191.124:3000/authenticated/doubly/user/password_change";
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            JSONObject postData = new JSONObject();
+            try {
+                postData.put("name", userName);
+                postData.put("password", password);
+                postData.put("new_password", newPassword );
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    String desc;
+                    Context context = getApplicationContext();
+
+                    //CharSequence text = "Signed up Successfully!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    try {
+                        desc = response.getString("message");
+                        final Toast toast = Toast.makeText(context, desc, duration);
+                        //textViewUser.setText((desc));
+                        toast.show();
+                       /* if (desc.equals("Phone updated!")) {
+
+                            //openMainAct();
+                        }*/
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", token);
+                    return params;
+                }
+            };
+
+            requestQueue.add(jsonObjectRequest);
+
+
     }
 
 

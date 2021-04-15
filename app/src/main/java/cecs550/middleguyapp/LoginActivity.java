@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void volleyGet(){
 
-        final TextView textView = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textView = (TextView) findViewById(R.id.editTextOldPwd);
 // ...
 
 // Instantiate the RequestQueue.
@@ -120,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void volleyPostSign(){
 
-        final TextView textViewUser = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textViewUser = (TextView) findViewById(R.id.editTextOldPwd);
         final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
 
         final String userName = textViewUser.getText().toString();
@@ -173,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void volleyPostLogin(){
 
-        final TextView textViewUser = (TextView) findViewById(R.id.editTextUserName);
+        final TextView textViewUser = (TextView) findViewById(R.id.editTextOldPwd);
         final TextView textViewPass = (TextView) findViewById(R.id.editTextUserPassword);
 
         final String userName = textViewUser.getText().toString();

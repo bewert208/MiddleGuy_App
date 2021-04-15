@@ -69,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
                     bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
                     bottomNavigationView.setSelectedItemId(R.id.nav_person);
                 }
+                else if (activity == 1) {
+                    BottomNavigationView bottomNavigationView;
+                    bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+                    bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+                    bottomNavigationView.setSelectedItemId(R.id.nav_home);
+                }
 
     }
 

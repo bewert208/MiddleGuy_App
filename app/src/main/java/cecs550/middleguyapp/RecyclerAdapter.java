@@ -73,6 +73,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             final Intent intent;
             int position = getAdapterPosition();
             String desc = DummyData.description[position];
+            String poster = DummyData.title[position];
+            int image = DummyData.picturePath[position];
 
             int duration = Toast.LENGTH_SHORT;
 
@@ -81,6 +83,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             //Intent intent = new Intent(view.getContext(), OfferActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("desc",desc);
+            bundle.putString("poster",poster);
+            bundle.putInt("image",image);
 
             intent = new Intent(context,OfferActivity.class);
             intent.putExtras(bundle);
