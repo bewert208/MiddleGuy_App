@@ -1,5 +1,6 @@
 package cecs550.middleguyapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -18,6 +19,10 @@ public class OfferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         Bundle bundle = getIntent().getExtras();
 
         final String desc = bundle.getString("desc");
@@ -63,6 +68,7 @@ public class OfferActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void openMainAct() {

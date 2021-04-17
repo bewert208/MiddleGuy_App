@@ -4,49 +4,37 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class FirstFragment extends Fragment {
 
     public FirstFragment(){
     }
 
-    /*private View.OnClickListener onItemClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)
-                    view.getTag();
-            int position = viewHolder.getAdapterPosition();
-            String shoeID = DummyData.description[position];
-            Intent intent = new Intent(getActivity(), OfferActivity.class);
-            intent.putExtra("shoeID",shoeID);
-            startActivity(intent);
-        }
-    };*/
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        /*return inflater.inflate(R.layout.fragment_1,
-                container, false);*/
 
+        setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_1, container,
                 false);
-        /*ListView lv = (ListView)rootView.findViewById(R.id.list);
-        lv.setAdapter(adaoter);*/
+
 
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recylcerViewPost);
@@ -55,14 +43,38 @@ public class FirstFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
+        FloatingActionButton createReq = rootView.findViewById(R.id.floatingActionBtnRequest);
+        createReq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCreateRequest();
+            }
+        });
 
 
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, values);
-        setListAdapter(adapter);*/
+
+
         return rootView;
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.drop_down_menu, menu);
+
+    }
+
+    public void openCreateRequest() {
+        Intent intent = new Intent(getActivity(), MakeRequest.class);
+        startActivity(intent);
+    }
+
+
+
+
 
 
 

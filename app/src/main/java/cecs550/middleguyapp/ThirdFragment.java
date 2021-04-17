@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import androidx.fragment.app.Fragment;
@@ -51,9 +53,10 @@ public class ThirdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //final String userName = getArguments().getString("username");
-        //final String token = getArguments().getString("token");
-        //final String password = getArguments().getString("password");
+
+
+
+
         SharedPreferences sh = this.getActivity().getSharedPreferences("MiddleGuyPref", Context.MODE_PRIVATE);
         final String userName = sh.getString("username","empty");
         final String token = sh.getString("token","empty");
@@ -61,10 +64,6 @@ public class ThirdFragment extends Fragment {
         final String picture = sh.getString("picture","empty");
 
 
-        /*final Intent i = new Intent(getActivity().getBaseContext(), EditProfile.class);
-        i.putExtra("username",userName);
-        i.putExtra("token", token);
-        i.putExtra("password",password);*/
 
         View view = inflater.inflate(R.layout.fragment_3, container,
                 false);
@@ -89,7 +88,6 @@ public class ThirdFragment extends Fragment {
                 JSONObject postData = new JSONObject();
                 try {
                     postData.put("name", userName);
-                    //postData.put("authorization", token);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -184,14 +182,7 @@ public class ThirdFragment extends Fragment {
 
                 try {
                     desc = response.getString("name");
-                    final Toast toast = Toast.makeText(context, desc, duration);
                     TextViewUserName.setText((desc));
-                    toast.show();
-                    //TextViewUserName.setText(desc);
-                   /* if (desc.equals("User name updated!"))
-                    {
-
-                    }*/
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -256,13 +247,10 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        //requestQueueBio.add(jsonObjectRequestBio);
-
 
 
 
         String postUrlEmail = "http://159.65.191.124:3000/authenticated/user/email_get";
-        //RequestQueue requestQueueEmail = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postDataEmail = new JSONObject();
 
@@ -298,10 +286,6 @@ public class ThirdFragment extends Fragment {
                 return params;
             }
         };
-
-        //requestQueueEmail.add(jsonObjectRequestEmail);
-
-
 
         String postUrlPhone = "http://159.65.191.124:3000/authenticated/user/phone_get";
 
@@ -341,8 +325,6 @@ public class ThirdFragment extends Fragment {
             }
         };
 
-        //requestQueuePhone.add(jsonObjectRequestPhone);
-        //requestQueuePhone.add(jsonObjectRequest);
         requestQueue.add(jsonObjectRequest);
         requestQueue.add(jsonObjectRequestBio);
         requestQueue.add(jsonObjectRequestEmail);

@@ -1,19 +1,16 @@
 package cecs550.middleguyapp;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toolbar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Placeholder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,31 +27,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Context context = getApplicationContext();
-        //CharSequence text = "Signed up Successfully!";
-        int duration = Toast.LENGTH_SHORT;
-
 
         Bundle extras = getIntent().getExtras();
         int activity = extras.getInt("activity");
-       //String token = extras.getString("token");
-        //String password = extras.getString("password");
-        //final Toast toast = Toast.makeText(context, username, duration);
-        //toast.show();
-
-        //Bundle bundle = new Bundle();
-        //bundle.putString("username",username);
-       // bundle.putString("token",token);
-        //bundle.putString("password",password);
-
-
-       // FragmentTransaction fragmentTramsaction = getSupportFragmentManager().beginTransaction();
-
-        //fragmentTramsaction.add(R.id.flFragment,new )
 
         frag1 = new FirstFragment();
         frag2 = new SecondFragment();
         frag3 = new ThirdFragment();
+
+
+
 
 
 
@@ -65,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
                 if (activity == 0)
                 {
                     BottomNavigationView bottomNavigationView;
-                    bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+                    bottomNavigationView =  findViewById(R.id.bottomNavigationView);
                     bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
                     bottomNavigationView.setSelectedItemId(R.id.nav_person);
                 }
                 else if (activity == 1) {
                     BottomNavigationView bottomNavigationView;
-                    bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+                    bottomNavigationView =  findViewById(R.id.bottomNavigationView);
                     bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
                     bottomNavigationView.setSelectedItemId(R.id.nav_home);
                 }
@@ -86,22 +68,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            //Bundle extras = getIntent().getExtras();
-            //String username = extras.getString("username");
-            //String token = extras.getString("token");
-            //String password = extras.getString("password");
-            //Bundle bundle = new Bundle();
-            //bundle.putString("username",username);
-            //bundle.putString("token",token);
-            //bundle.putString("password",password);
             switch (item.getItemId()) {
                 case R.id.nav_home:
                     setFragment(frag1);
-                    //openLogin_Activity();
                     break;
 
                 case  R.id.nav_chat:
@@ -109,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_person:
-                    //frag3.setArguments(bundle);
                     setFragment(frag3);
                     break;
             }
