@@ -53,17 +53,26 @@ public class OfferActivity extends AppCompatActivity {
         sendOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                message.setText("");
-                price.setText("");
+                if(message.getText().toString().matches("") || price.getText().toString().matches("" )) {
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    CharSequence text2 = "Missing field!";
+                    Toast toast1 = Toast.makeText(context, text2, duration);
+                    toast1.show();
+                }
+                else {
+                    message.setText("");
+                    price.setText("");
+                    Context context = getApplicationContext();
+                    CharSequence text = "Offer sent!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
 
-                CharSequence text = "Offer sent!";
+                    openMainAct();
+                }
 
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
 
-                openMainAct();
 
 
             }
