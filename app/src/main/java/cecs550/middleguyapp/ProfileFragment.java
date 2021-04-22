@@ -3,12 +3,8 @@ package cecs550.middleguyapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -41,14 +29,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_APPEND;
+public class ProfileFragment extends Fragment {
 
-public class ThirdFragment extends Fragment {
-
-    public ThirdFragment(){
+    public ProfileFragment(){
     }
-    //public Fragment frag4;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -73,8 +57,7 @@ public class ThirdFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity2();
-                //goToFrag();
+                openMyRequests();
             }
         });
 
@@ -147,11 +130,6 @@ public class ThirdFragment extends Fragment {
             }
         });
 
-        /*Bundle extras = getIntent().getExtras();
-        String userName = extras.getString("username");
-        String password = extras.getString("password");
-        final String token = extras.getString("token");*/
-
         final TextView TextViewUserName = (TextView) view.findViewById(R.id.textViewUserName);
         final TextView TextViewBio = (TextView) view.findViewById(R.id.textViewBio);
         final TextView TextViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
@@ -162,14 +140,7 @@ public class ThirdFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postData = new JSONObject();
-        /*try {
-            postData.put(" ",'');
 
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
             @Override
@@ -204,13 +175,7 @@ public class ThirdFragment extends Fragment {
         };
 
 
-
-
-
-
-
         String postUrlBio = "http://159.65.191.124:3000/authenticated/user/bio_get";
-       // RequestQueue requestQueueBio = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         JSONObject postDataBio = new JSONObject();
 
@@ -230,7 +195,7 @@ public class ThirdFragment extends Fragment {
                     e.printStackTrace();
                     CharSequence text = "Obtaining bio error";
                     final Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    //toast.show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -246,8 +211,6 @@ public class ThirdFragment extends Fragment {
                 return params;
             }
         };
-
-
 
 
         String postUrlEmail = "http://159.65.191.124:3000/authenticated/user/email_get";
@@ -270,7 +233,7 @@ public class ThirdFragment extends Fragment {
                     e.printStackTrace();
                     CharSequence text = "Obtaining email error";
                     final Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    //toast.show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -308,7 +271,7 @@ public class ThirdFragment extends Fragment {
                     e.printStackTrace();
                     CharSequence text = "Obtaining phone error";
                     final Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    //toast.show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -335,8 +298,13 @@ public class ThirdFragment extends Fragment {
     }
 
 
-    public void openActivity2() {
+    public void openMyRequests() {
         Intent intent = new Intent(getActivity(), MyRequests.class);
+        int i = 0;
+        intent.putExtra("activity",i);
+        intent.putExtra("title","Looking for a car.");
+        intent.putExtra("desc","Need a used car for getting to work.");
+        intent.putExtra("pos",0);
         startActivity(intent);
     }
 

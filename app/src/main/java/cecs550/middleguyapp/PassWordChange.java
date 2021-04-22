@@ -113,8 +113,13 @@ public class PassWordChange extends AppCompatActivity {
                     desc = response.getString("message");
                     final Toast toast = Toast.makeText(context, desc, duration);
 
+
                     toast.show();
-                    openEditAct();
+                    if (desc.equals("User password changed!"))
+                    {
+                        openEditAct();
+                    }
+
 
                     SharedPreferences.Editor myEdit = sh.edit();
                     myEdit.putString("password", newPassword);

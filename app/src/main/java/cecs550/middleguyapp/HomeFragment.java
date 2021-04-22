@@ -22,9 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class FirstFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    public FirstFragment(){
+    public HomeFragment(){
     }
 
     @Override

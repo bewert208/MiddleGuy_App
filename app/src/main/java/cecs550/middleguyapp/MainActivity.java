@@ -1,16 +1,13 @@
 package cecs550.middleguyapp;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         int activity = extras.getInt("activity");
 
-        frag1 = new FirstFragment();
-        frag2 = new SecondFragment();
-        frag3 = new ThirdFragment();
+        frag1 = new HomeFragment();
+        frag2 = new ChatFragment();
+        frag3 = new ProfileFragment();
 
 
 

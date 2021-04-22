@@ -64,7 +64,7 @@
         android:layout_width="225dp"
         android:layout_height="115dp"
         android:ems="10"
-        android:gravity="start|top"
+        android:gravity="bottom|left"
         android:hint="Enter your Message"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"

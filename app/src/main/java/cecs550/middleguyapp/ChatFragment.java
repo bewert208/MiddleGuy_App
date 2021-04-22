@@ -9,13 +9,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class SecondFragment extends Fragment {
+public class ChatFragment extends Fragment {
 
-    public SecondFragment(){
+    public ChatFragment(){
     }
 
 
-
+    //fragment for containing the chat functionality
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
