@@ -1,11 +1,5 @@
 package cecs550.middleguyapp;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -13,25 +7,22 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,9 +33,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class EditProfile extends AppCompatActivity {
@@ -161,7 +150,6 @@ public class EditProfile extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
-            //resume tasks needing this permission
         }
     }
 
@@ -196,13 +184,11 @@ public class EditProfile extends AppCompatActivity {
                     String desc;
                     Context context = getApplicationContext();
 
-                    //CharSequence text = "Signed up Successfully!";
                     int duration = Toast.LENGTH_SHORT;
 
                     try {
                         desc = response.getString("message");
                         final Toast toast = Toast.makeText(context, desc, duration);
-                        //textViewUser.setText((desc));
                         toast.show();
                         if (desc.equals("User name updated!")) {
 
@@ -210,8 +196,6 @@ public class EditProfile extends AppCompatActivity {
                             myEdit.putString("username", newName);
                             myEdit.commit();
 
-
-                            //openMainAct();
                         }
 
                     } catch (JSONException e) {
@@ -225,7 +209,7 @@ public class EditProfile extends AppCompatActivity {
                 }
             }) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", token);
                     return params;
@@ -266,13 +250,11 @@ public class EditProfile extends AppCompatActivity {
                     String desc;
                     Context context = getApplicationContext();
 
-                    //CharSequence text = "Signed up Successfully!";
                     int duration = Toast.LENGTH_SHORT;
 
                     try {
                         desc = response.getString("message");
                         final Toast toast = Toast.makeText(context, desc, duration);
-                        //textViewUser.setText((desc));
                         toast.show();
                         if (desc.equals("Bio updated!")) {
 
@@ -290,7 +272,7 @@ public class EditProfile extends AppCompatActivity {
                 }
             }) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", token);
                     return params;
@@ -298,7 +280,6 @@ public class EditProfile extends AppCompatActivity {
             };
 
             requestQueue.add(jsonObjectRequest);
-            // openMainAct();
         }
     }
 
@@ -333,18 +314,14 @@ public class EditProfile extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     String desc;
                     Context context = getApplicationContext();
-
-                    //CharSequence text = "Signed up Successfully!";
                     int duration = Toast.LENGTH_SHORT;
 
                     try {
                         desc = response.getString("message");
                         final Toast toast = Toast.makeText(context, desc, duration);
-                        //textViewUser.setText((desc));
                         toast.show();
                         if (desc.equals("Email updated!")) {
 
-                            //openMainAct();
                         }
 
                     } catch (JSONException e) {
@@ -358,7 +335,7 @@ public class EditProfile extends AppCompatActivity {
                 }
             }) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", token);
                     return params;
@@ -401,8 +378,6 @@ public class EditProfile extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     String desc;
                     Context context = getApplicationContext();
-
-                    //CharSequence text = "Signed up Successfully!";
                     int duration = Toast.LENGTH_SHORT;
 
                     try {
@@ -412,7 +387,6 @@ public class EditProfile extends AppCompatActivity {
                         toast.show();
                         if (desc.equals("Phone updated!")) {
 
-                            //openMainAct();
                         }
 
                     } catch (JSONException e) {
@@ -426,7 +400,7 @@ public class EditProfile extends AppCompatActivity {
                 }
             }) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", token);
                     return params;
@@ -468,7 +442,7 @@ public class EditProfile extends AppCompatActivity {
                 return false;
             }
         }
-        else { //permission is automatically granted on sdk<23 upon installation
+        else {
             Log.v(TAG,"Permission is granted");
             return true;
         }

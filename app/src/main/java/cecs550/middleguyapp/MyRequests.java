@@ -71,7 +71,7 @@ public class MyRequests extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(MyRequests.this,"clicked item:"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_SHORT).show();
+
                 String detail = arrayList.get(i);
                 String title = arrayListTitle.get(i);
                 openEditRequest(detail, title, i);

@@ -105,8 +105,6 @@ public class PassWordChange extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 String desc;
                 Context context = getApplicationContext();
-
-                //CharSequence text = "Signed up Successfully!";
                 int duration = Toast.LENGTH_SHORT;
 
                 try {
@@ -138,7 +136,7 @@ public class PassWordChange extends AppCompatActivity {
             }
         }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", token);
                 return params;

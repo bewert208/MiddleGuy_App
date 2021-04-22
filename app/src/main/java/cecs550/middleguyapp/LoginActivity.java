@@ -184,7 +184,6 @@ public class LoginActivity extends AppCompatActivity {
                     String token;
                     Context context = getApplicationContext();
 
-                    //CharSequence text = "Signed up Successfully!";
                     int duration = Toast.LENGTH_SHORT;
 
                     try {
@@ -194,14 +193,12 @@ public class LoginActivity extends AppCompatActivity {
                         String toastMessage = desc + " " + userName + " logged in!";
                         final Toast toast1 = Toast.makeText(context, desc, duration);
                         textViewUser.setText((desc));
-                        //toast.setGravity(Gravity.BOTTOM|Gravity.LEFT,0,0);
                         toast1.show();
                         if (desc.equals("Session Created!")) {
                             textViewUser.setText("");
                             textViewPass.setText("");
                             final Toast toast = Toast.makeText(context, toastMessage, duration);
                             toast.show();
-                            // i.putExtra("UserToken", token);
                             int activity = 1;
 
                             openLogin_Activity(activity);
@@ -210,7 +207,6 @@ public class LoginActivity extends AppCompatActivity {
                             myEdit.putString("username", userName);
                             myEdit.putString("password", password);
                             myEdit.putString("token", token);
-                            // myEdit.putString("picture",defaultImage);
                             myEdit.commit();
                         } else {
                             toast1.show();

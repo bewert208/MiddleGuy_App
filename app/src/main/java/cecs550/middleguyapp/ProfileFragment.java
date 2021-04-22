@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -109,7 +108,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }){
                     @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
+                    public Map<String, String> getHeaders() {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("Authorization", token);
                         return params;
@@ -134,7 +133,6 @@ public class ProfileFragment extends Fragment {
         final TextView TextViewBio = (TextView) view.findViewById(R.id.textViewBio);
         final TextView TextViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
         final TextView TextViewEmail = (TextView) view.findViewById(R.id.textViewEmail);
-        //final String newName = TextViewUserName.getText().toString();
 
         String postUrl = "http://159.65.191.124:3000/authenticated/user/name_get";
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -146,11 +144,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 String desc;
-                Context context = (getActivity().getApplicationContext());
-
-                //CharSequence text = "Signed up Successfully!";
-                int duration = Toast.LENGTH_SHORT;
-
                 try {
                     desc = response.getString("name");
                     TextViewUserName.setText((desc));
@@ -167,7 +160,7 @@ public class ProfileFragment extends Fragment {
             }
         }){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", token);
                 return params;
@@ -183,9 +176,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 String desc;
-                Context context = (getActivity().getApplicationContext());
-
-                int duration = Toast.LENGTH_SHORT;
 
                 try {
                     desc = response.getString("bio");
@@ -193,9 +183,6 @@ public class ProfileFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    CharSequence text = "Obtaining bio error";
-                    final Toast toast = Toast.makeText(context, text, duration);
-                    //toast.show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -205,7 +192,7 @@ public class ProfileFragment extends Fragment {
             }
         }){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", token);
                 return params;
@@ -221,9 +208,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 String desc;
-                Context context = (getActivity().getApplicationContext());
-
-                int duration = Toast.LENGTH_SHORT;
 
                 try {
                     desc = response.getString("email");
@@ -231,9 +215,7 @@ public class ProfileFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    CharSequence text = "Obtaining email error";
-                    final Toast toast = Toast.makeText(context, text, duration);
-                    //toast.show();
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -243,7 +225,7 @@ public class ProfileFragment extends Fragment {
             }
         }){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", token);
                 return params;
@@ -258,9 +240,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 String desc;
-                Context context = (getActivity().getApplicationContext());
-
-                int duration = Toast.LENGTH_SHORT;
 
                 try {
                     desc = response.getString("phone");
@@ -269,9 +248,8 @@ public class ProfileFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    CharSequence text = "Obtaining phone error";
-                    final Toast toast = Toast.makeText(context, text, duration);
-                    //toast.show();
+
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -281,7 +259,7 @@ public class ProfileFragment extends Fragment {
             }
         }){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", token);
                 return params;

@@ -2,25 +2,15 @@ package cecs550.middleguyapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import static java.security.AccessController.getContext;
 
 public class RecyclerAdapter extends RecyclerView.Adapter {
 
@@ -76,11 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             String poster = DummyData.title[position];
             int image = DummyData.picturePath[position];
 
-            int duration = Toast.LENGTH_SHORT;
 
-            //Toast toast = Toast.makeText(view.getContext(), test, duration);
-            //toast.show();
-            //Intent intent = new Intent(view.getContext(), OfferActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("desc",desc);
             bundle.putString("poster",poster);
