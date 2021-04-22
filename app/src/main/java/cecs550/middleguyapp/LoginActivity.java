@@ -2,7 +2,9 @@ package cecs550.middleguyapp;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+
+
 
     public Button loginBtn;
     public Button signUpBtn;
@@ -51,7 +55,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        final int test = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
     }
+
 
     public void openLogin_Activity( int activity) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -60,40 +67,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    public void volleyGet(){
-
-        final TextView textView = (TextView) findViewById(R.id.editTextOldPwd);
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://159.65.191.124:3000/ping";
-
-
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                String desc;
-                try {
-                    desc = response.getString("message");
-                    textView.setText((desc));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("nope");
-
-                error.printStackTrace();
-            }
-
-    });
-
-        queue.add(getRequest);
-
-    }
 
     public void volleyPostSign(){
 
@@ -200,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                             final Toast toast = Toast.makeText(context, toastMessage, duration);
                             toast.show();
                             int activity = 1;
+
 
                             openLogin_Activity(activity);
                             SharedPreferences sharedPreferences = getSharedPreferences("MiddleGuyPref", MODE_PRIVATE);

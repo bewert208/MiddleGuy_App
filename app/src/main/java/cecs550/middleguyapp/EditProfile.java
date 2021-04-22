@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -99,7 +100,16 @@ public class EditProfile extends AppCompatActivity {
         SharedPreferences sh = this.getSharedPreferences("MiddleGuyPref", Context.MODE_PRIVATE);
         final String picture = sh.getString("picture","empty");
         ImageView imageView = findViewById(R.id.editProfileImg);
-        imageView.setImageBitmap(BitmapFactory.decodeFile(picture));
+
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != 0){
+            Context context = this;
+            imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.person));
+
+
+        }
+        else {
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picture));
+        }
 
         changeImgBtn = findViewById(R.id.changeImageBtn);
 

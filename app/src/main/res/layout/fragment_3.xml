@@ -107,7 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.102"
-        app:srcCompat="@drawable/person" />
+        app:srcCompat="@drawable/ic_baseline_person_24" />
 
     <TextView
         android:id="@+id/textViewEmail"
