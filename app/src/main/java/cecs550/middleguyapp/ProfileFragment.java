@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
@@ -43,7 +44,6 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sh = this.getActivity().getSharedPreferences("MiddleGuyPref", Context.MODE_PRIVATE);
         final String userName = sh.getString("username","empty");
         final String token = sh.getString("token","empty");
-        final String password = sh.getString("password","empty");
         final String picture = sh.getString("picture","empty");
 
 
@@ -52,7 +52,17 @@ public class ProfileFragment extends Fragment {
                 false);
         Button btn = (Button) view.findViewById(R.id.btnMyRequests);
         ImageView profileImg = view.findViewById(R.id.imageView2);
-        profileImg.setImageBitmap(BitmapFactory.decodeFile(picture));
+
+        if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != 0){
+            Context context = getContext();
+            profileImg.setImageDrawable(context.getResources().getDrawable(R.drawable.person));
+
+
+        }
+        else {
+            profileImg.setImageBitmap(BitmapFactory.decodeFile(picture));
+        }
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,11 +100,9 @@ public class ProfileFragment extends Fragment {
                             toast.show();
                             if (desc.equals("User Session Token Deleted!"))
                             {
+
                                 openLogin_Activity();
-                                SharedPreferences sh = getActivity().getSharedPreferences("MiddleGuyPrefs", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sh.edit();
-                                editor.clear();
-                                editor.apply();
+
                             }
 
                         } catch (JSONException e) {
@@ -150,7 +158,6 @@ public class ProfileFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    TextViewUserName.setText("nope");
                 }
             }
         }, new Response.ErrorListener() {

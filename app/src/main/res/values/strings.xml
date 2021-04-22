@@ -2,7 +2,7 @@
     <string name="app_name">MiddleGuyApp</string>
     <string name="please_add_a_bio">Please add a bio</string>
     <string name="my_requests">My Requests</string>
-    <string name="log_out">Log Out</string>
+    <string name="log_out">Logout</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="please_add_a_phone">Please add a phone</string>
     <string name="please_add_a_email">Please add a email</string>
