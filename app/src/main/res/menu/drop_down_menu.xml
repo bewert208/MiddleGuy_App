@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id= "@+id/item1"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Sort by category"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item android:id= "@+id/SubCat1"
+                android:title="Services"
+                app:showAsAction="never" />
+
+            <item android:id= "@+id/SubCat2"
+                android:title="Items for sale"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+
+
+    <item android:id= "@+id/item2"
+        android:title="Sort by time"
+        app:showAsAction="never">
+        <menu>
+            <item android:id= "@+id/Subitem1"
+                android:title="Newest"
+                app:showAsAction="never" />
+
+            <item android:id= "@+id/Subitem2"
+                android:title="Oldest"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
+
+    <item android:id= "@+id/item3"
+        android:title="Sort by A - Z"
+        app:showAsAction="never">
+        <menu>
+            <item android:id= "@+id/Subitem3"
+                android:title="A - Z"
+                app:showAsAction="never" />
+
+            <item android:id= "@+id/Subitem4"
+                android:title="Z - A"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
+
+
+</menu>

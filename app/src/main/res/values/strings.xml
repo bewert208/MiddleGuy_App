@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">MiddleGuyApp</string>
+    <string name="please_add_a_bio">Please add a bio</string>
+    <string name="my_requests">My Requests</string>
+    <string name="log_out">Log Out</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="please_add_a_phone">Please add a phone</string>
+    <string name="please_add_a_email">Please add a email</string>
+    <string name="my_offers">My Offers</string>
+    <string name="received_offers">Received Offers</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="please_enter_your_request_below">Please Enter your request Below:</string>
+    <string name="create_request">Create request</string>
+    <string name="change_password">Change Password</string>
+    <string name="back">Back</string>
+    <string name="username">Username</string>
+    <string name="new_password">New Password</string>
+    <string name="enter_your_credentials">Enter your credentials:</string>
+    <string name="old_password">Old Password</string>
+    <string name="textview">TextView</string>
+    <string name="if_you_have_an_offer_please_enter_it_below">If you have an offer please enter it below:</string>
+    <string name="price">Price:</string>
+    <string name="send_offer">Send Offer</string>
+    <string name="new_name">New Name</string>
+    <string name="update">Update</string>
+    <string name="bio">Bio</string>
+    <string name="change_image">Change Image</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
 </resources>
